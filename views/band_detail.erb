@@ -1,4 +1,15 @@
-<h1><em><%= @band.name %></em></h1><br />
+<h1><em><%= @band.name() %></em></h1><br />
+
+<h3>Edit band name:</h3>
+<form action="/bands/<%= @band.id() %>/edit_name" method="post">
+  <input name="_method" type="hidden" value="patch" />
+
+  <div class="form-group">
+    <input id="band_name" name="band_name" class="form-control" type="text" />
+  </div>
+
+  <button type="submit" class="btn btn-warning">Edit</button>
+</form><br />
 
 <h3>Venues played:</h3>
 
