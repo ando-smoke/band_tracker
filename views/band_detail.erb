@@ -1,0 +1,15 @@
+<h1><em><%= @band.name %></em></h1><br />
+
+<h3>Venues played:</h3>
+
+<ul>
+  <% if @venues_played.any?() %>
+    <% @venues_played.order(:name).each() do |venue| %>
+      <li><%= venue.name() %></li>
+    <% end %>
+  <% else %>
+    <li><em>No venues played!</em></li>
+  <% end %>
+</ul>
+
+<a href="/bands">Back</a>

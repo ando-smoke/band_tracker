@@ -27,3 +27,9 @@ post("/bands") do
   Band.create({ :name => band_name })
   redirect("/bands")
 end
+
+get("/bands/:id") do
+  @band = Band.find(params.fetch("id").to_i())
+  @venues_played = @band.venues()
+  erb(:band_detail)
+end

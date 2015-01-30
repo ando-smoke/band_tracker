@@ -16,7 +16,9 @@
 <ul>
   <% if @bands.any?() %>
     <% @bands.order(:name).each() do |band| %>
-      <li><%= band.name() %></li>
+      <li>
+        <a href="/bands/<%= band.id() %>"><%= band.name() %></a>
+      </li>
     <% end %>
   <% else %>
     <li><em>The band list is empty!</em></li>
