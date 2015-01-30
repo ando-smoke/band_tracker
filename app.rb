@@ -16,3 +16,14 @@ post("/venues") do
   Venue.create({ :name => venue_name })
   redirect("/venues")
 end
+
+get("/bands") do
+  @bands = Band.all()
+  erb(:bands)
+end
+
+post("/bands") do
+  band_name = params.fetch("band_name")
+  Band.create({ :name => band_name })
+  redirect("/bands")
+end
