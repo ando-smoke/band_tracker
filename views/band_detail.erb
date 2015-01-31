@@ -1,15 +1,25 @@
 <h1><em><%= @band.name() %></em></h1><br />
 
-<h3>Edit band name:</h3>
-<form action="/bands/<%= @band.id() %>/edit_name" method="post">
-  <input name="_method" type="hidden" value="patch" />
+<h3>Select all venues played:</h3>
 
-  <div class="form-group">
-    <input id="band_name" name="band_name" class="form-control" type="text" />
-  </div>
+<% if @venue_choices.any?() %>
+  <form action="/bands/<%= @band.id() %>/add_venues" method="post">
+    <input name="_method" type="hidden" value="patch" />
 
-  <button type="submit" class="btn btn-warning">Edit</button>
-</form><br />
+    <% @venue_choices.order(:name).each() do |venue| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="venue_ids[]" value="<%= venue.id() %>" />
+          <%= venue.name() %>
+        </label>
+      </div>
+    <% end %>
+
+    <button type="submit" class="btn btn-primary">Add/Edit Venues</button>
+  </form>
+<% else %>
+  <p><em>No venues played!</em></p>
+<% end %><br />
 
 <h3>Venues played:</h3>
 
@@ -22,6 +32,17 @@
     <li><em>No venues played!</em></li>
   <% end %>
 </ul><br />
+
+<h3>Edit band name:</h3>
+<form action="/bands/<%= @band.id() %>/edit_name" method="post">
+  <input name="_method" type="hidden" value="patch" />
+
+  <div class="form-group">
+    <input id="band_name" name="band_name" class="form-control" type="text" />
+  </div>
+
+  <button type="submit" class="btn btn-warning">Edit</button>
+</form><br />
 
 <form action="/bands/<%= @band.id() %>/delete" method="post">
   <input name="_method" type="hidden" value="delete" />
