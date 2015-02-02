@@ -41,16 +41,11 @@ delete("/bands/:id") do
   redirect("/bands")
 end
 
-patch("/bands/:id/add_venues") do
+patch("/bands/:id") do
   venue_ids = params["venue_ids"]
+  new_band_name = params["band_name"]
   @band = Band.find(params.fetch("id").to_i())
-  @band.update({ :venue_ids => venue_ids })
-  redirect("/bands/" + @band.id().to_s())
-end
-
-patch("/bands/:id/edit_name") do
-  new_band_name = params.fetch("band_name")
-  @band = Band.find(params.fetch("id").to_i())
-  @band.update({ :name => new_band_name })
+  @band.update({ :venue_ids => venue_ids }) unless venue_ids.nil?
+  @band.update({ :name => new_band_name }) unless new_band_name.nil?
   redirect("/bands/" + @band.id().to_s())
 end

@@ -3,7 +3,7 @@
 <h3>Select All Venues Played:</h3>
 
 <% if @venue_choices.any?() %>
-  <form action="/bands/<%= @band.id() %>/add_venues" method="post">
+  <form action="/bands/<%= @band.id() %>" method="post">
     <input name="_method" type="hidden" value="patch" />
 
     <% @venue_choices.order(:name).each() do |venue| %>
@@ -34,7 +34,7 @@
 </ul><br />
 
 <h3>Edit Band Name:</h3>
-<form action="/bands/<%= @band.id() %>/edit_name" method="post">
+<form action="/bands/<%= @band.id() %>" method="post">
   <input name="_method" type="hidden" value="patch" />
 
   <div class="form-group">
